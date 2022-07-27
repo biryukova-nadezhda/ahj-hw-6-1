@@ -81,8 +81,8 @@ export default class DnD {
     this.cloneEl.style.top = `${event.pageY - this.shiftY}px`;
 
     // Если под курсором мыши секция, то ищем список задач в секции
-    if (this.bellowEl.closest('.section')) {
-      const parent = this.bellowEl.closest('.section').querySelector('.task-container');
+    if (this.bellowEl.closest('.task-section')) {
+      const parent = this.bellowEl.closest('.task-section').querySelector('.task-list');
 
       if (!parent.hasChildNodes()) {
         parent.append(this.emptyLi);
@@ -105,9 +105,9 @@ export default class DnD {
     }
 
     // Если элемент снизу не секция и не ее элемент, то удаляем
-    // клонированный элемент ипоказываем изначальный
-    if (!this.bellowEl.closest('.section')) {
-      document.querySelector('.section').removeChild(this.cloneEl);
+    // клонированный элемент и показываем изначальный
+    if (!this.bellowEl.closest('.task-section')) {
+      document.querySelector('.task-section').removeChild(this.cloneEl);
       document.querySelector('.empty').remove();
       this.draggEl.style.opacity = 100;
       this.cloneEl = null;
@@ -116,23 +116,23 @@ export default class DnD {
     }
 
     // Находим контейнер задач
-    const parentUl = this.bellowEl.closest('.section').querySelector('.task-container');
+    const parentUl = this.bellowEl.closest('.task-section').querySelector('.task-list');
 
-    if (this.bellowEl.closest('.section__header')) {
-      parentUl.prepend(this.cloneEl);
-    } else if (this.bellowEl.closest('.section__button')) {
-      parentUl.append(this.cloneEl);
+    if (this.bellowEl.closest('task-section__header')) {
+      parentUl.prepend(this.draggEl);
+    } else if (this.bellowEl.closest('.task-section__footer')) {
+      parentUl.append(this.draggEl);
     } else {
-      parentUl.insertBefore(this.cloneEl, this.bellowEl.closest('.task'));
+      parentUl.insertBefore(this.draggEl, this.bellowEl.closest('.task'));
+      // parentUl.insertBefore(this.dropItem, this.elemBellow.closest('li'));
     }
 
     if (document.querySelector('.empty')) {
       document.querySelector('.empty').remove();
     }
 
-    this.cloneEl.classList.remove('dragged');
-    this.cloneEl.style = '100%';
-    this.draggEl.remove();
+    this.cloneEl.remove();
+    this.draggEl.style.opacity = 100;
     this.draggEl = null;
     this.cloneEl = null;
   }
