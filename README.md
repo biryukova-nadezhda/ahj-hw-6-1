@@ -1,5 +1,5 @@
 ## Работа с файлами, DnD
-Git-pages: https://biryukova-nadezhda.github.io/ahj-hw-6-1/
+Git-pages:
 
 [![Build status](https://ci.appveyor.com/api/projects/status/i53uh3n0bbuyqj0h?svg=true)](https://ci.appveyor.com/project/biryukova-nadezhda/ahj-hw-6-1)
 

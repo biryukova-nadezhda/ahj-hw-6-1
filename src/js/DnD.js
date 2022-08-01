@@ -118,13 +118,12 @@ export default class DnD {
     // Находим контейнер задач
     const parentUl = this.bellowEl.closest('.task-section').querySelector('.task-list');
 
-    if (this.bellowEl.closest('task-section__header')) {
+    if (this.bellowEl.closest('.task-section__header')) {
       parentUl.prepend(this.draggEl);
     } else if (this.bellowEl.closest('.task-section__footer')) {
       parentUl.append(this.draggEl);
     } else {
-      parentUl.insertBefore(this.draggEl, this.bellowEl.closest('.task'));
-      // parentUl.insertBefore(this.dropItem, this.elemBellow.closest('li'));
+      this.bellowEl.closest('.task').insertAdjacentElement('beforebegin', this.draggEl);
     }
 
     if (document.querySelector('.empty')) {
