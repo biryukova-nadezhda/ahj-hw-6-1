@@ -30,15 +30,6 @@ export default class DOM {
 
     const addSectionButton = this.createAddSectionButton();
     this.addListener(addSectionButton, 'click', this.addSectionButtonHandler);
-
-    const buttonRemoveSection = Array.from(document.querySelectorAll('.task-section__button'));
-
-    buttonRemoveSection.forEach((button) => {
-      button.addEventListener('click', (event) => {
-        const section = event.target.closest('.task-section');
-        section.remove();
-      });
-    });
   }
 
   /* ----------- Методы работы с LocalStorage -------*/
@@ -65,27 +56,6 @@ export default class DOM {
 
     return obj;
   }
-
-  /* createObj(section) {
-    const tasks = Array.from(section.querySelectorAll('.task'));
-
-    const tasksArr = tasks.map((task) => {
-      const obj = {};
-      obj.className = task.classList.value;
-      obj.content = task.querySelector('.task-text').textContent;
-      obj.imageSrc = task.querySelector('.image-block__image').src;
-
-      return obj
-    });
-
-    const obj = {
-      classSect: section.classList.value,
-      titleSect: section.querySelector('.task-section__title').textContent,
-      tasksArr: tasksArr,
-    }
-
-    return obj;
-  } */
 
   /*
   * Метод получения массива объектов секции для сохранения
@@ -118,29 +88,6 @@ export default class DOM {
       this.container.append(section);
     });
   }
-
-  /* displayData(arrData) {
-    arrData.forEach((sectionObj) => {
-      const section = this.createSection(sectionObj.titleSect, sectionObj.classSect);
-      const taskList = section.querySelector('.task-list');
-
-      sectionObj.tasksArr.forEach((task) => {
-        const li = this.createTask(task.content, task.className);
-
-        if(task.imageSrc !== null) {
-          const imageBlock = this.createEl('div', `image-block`);
-          const image = this.createEl('img', 'image-block__image');
-          image.src = task.imageSrc;
-          imageBlock.append(image);
-          li.prepend(imageBlock);
-        }
-
-        taskList.append(li);
-      })
-
-      this.container.append(section);
-    })
-  } */
 
   /* ----------- Методы связанные с созданием элементов -------*/
   /*
